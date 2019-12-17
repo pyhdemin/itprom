@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+        .directory {
+            float: left;
+        }
+        .editButtons {
+            float: right;
+        }
+    </style>
+    <title>IT Prom test</title>
+</head>
+
+<body>
+
+<div id="directory" class="directory">
+    <button id="employeeButton" type="button" class="btn btn-primary">Сотрудники</button>
+    <button id="departmentButton" type="button" class="btn btn-primary">Отделы</button>
+    <button id="professionButton" type="button" class="btn btn-primary">Профессии</button>
+</div>
+
+<div id="editButtons" class="editButtons">
+    <button id="addButton" type="button" class="btn btn-primary">Add</button>
+    <button id="editButton" type="button" class="btn btn-success selectableButtons">Edit</button>
+    <button id="deleteButton" type="button" class="btn btn-danger selectableButtons">Delete</button>
+</div>
+
+
+<div id="employeeEdit" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Карточка сотрудника</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>ФИО</label>
+                        <input type="text" class="form-control" name="fio" aria-describedby="emailHelp" placeholder="Введите ФИО сотрудника">
+                    </div>
+                    <div class="form-group">
+                        <label>Профессия</label>
+                        <select class="form-control" name="profession">
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Отдел</label>
+                        <select class="form-control" name="department">
+                            <option>1</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Примечание</label>
+                        <input type="text" class="form-control" name="note" aria-describedby="emailHelp" placeholder="примечание">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="departmentEdit" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Карточка отдела</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Наименование</label>
+                        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Введите наименование отдела">
+                    </div>
+                    <div class="form-group">
+                        <label>Примечание</label>
+                        <input type="text" class="form-control" name="note" aria-describedby="emailHelp" placeholder="примечание">
+                    </div>
+                    <div class="form-group">
+                        <label>Родительский отдел</label>
+                        <select class="form-control" name="parent">
+                            <option>1</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="professionEdit" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Карточка профессии</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Наименование</label>
+                        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Введите наименование профессии">
+                    </div>
+                    <div class="form-group">
+                        <label>Примечание</label>
+                        <input type="text" class="form-control" name="note" aria-describedby="emailHelp" placeholder="примечание">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel">Cancel</button>
+                <button type="button" class="btn btn-primary save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Удалить</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel">Cancel</button>
+                <button type="button" class="btn btn-primary delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ошибка</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Ошибка</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary ok">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table id="dataTable" class="table table-striped"></table>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    $("#employeeButton").click(function () {
+        updateEmployeeTable();
+        $("#editButtons .selectableButtons").attr("disabled", true);
+    });
+
+    $("#departmentButton").click(function () {
+        updateDepartmentTable();
+        $("#editButtons .selectableButtons").attr("disabled", true);
+    });
+
+    $("#professionButton").click(function () {
+        updateProfessionTable();
+        $("#editButtons .selectableButtons").attr("disabled", true);
+    });
+
+    $('#dataTable').on('click', '.clickable-row', function(event) {
+        if($(this).hasClass("table-primary")) {
+            $(this).removeClass('table-primary');
+            $("#editButtons .selectableButtons").attr("disabled", true);
+        }
+        else {
+            $(this).addClass('table-primary').siblings().removeClass('table-primary');
+            $("#editButtons .selectableButtons").removeAttr("disabled");
+        }
+    });
+
+    $("#addButton").click(function () {
+        if ($("#dataTable").hasClass("employeeSelected")) {
+            $("#employeeEdit .modal-title").empty();
+            $("#employeeEdit .modal-title").append("Добавить сотрудника");
+            $('#employeeEdit').modal('show');
+            $("#employeeEdit select[name='profession']").empty();
+            $.getJSON( "professions", function( data ) {
+                var items = [];
+                $.each( data, function( key, profession ) {
+                    items.push("<option value='" + profession.id +"'>"+ profession.name +"</option>");
+                });
+                $("#employeeEdit select[name='profession']").append(items.join(""));
+            });
+            $("#employeeEdit select[name='department']").empty();
+            $.getJSON( "departments", function( data ) {
+                var items = [];
+                $.each( data, function( key, department ) {
+                    items.push("<option value='" + department.id +"'>"+ department.name +"</option>");
+                });
+                $("#employeeEdit select[name='department']").append(items.join(""));
+            });
+            $("#employeeEdit .modal-footer .save").unbind("click");
+            $("#employeeEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "employees",
+                    type: "POST",
+                    data: JSON.stringify(getFormData($("#employeeEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(){
+                        updateEmployeeTable();
+                        $('#employeeEdit').modal('hide');
+                    }
+                });
+            })
+        }
+        if ($("#dataTable").hasClass("departmentSelected")) {
+            $("#departmentEdit .modal-title").empty();
+            $("#departmentEdit .modal-title").append("Добавить отдел");
+            $('#departmentEdit').modal('show');
+            $("#departmentEdit select[name='parent']").empty();
+            $.getJSON( "departments", function( data ) {
+                var items = [];
+                items.push("<option value></option>");
+                $.each( data, function( key, department ) {
+                    items.push("<option value='" + department.id +"'>"+ department.name +"</option>");
+                });
+                $("#departmentEdit select[name='parent']").append(items.join(""));
+            });
+            $("#departmentEdit .modal-footer .save").unbind("click");
+            $("#departmentEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "departments",
+                    type: "POST",
+                    data: JSON.stringify(getFormData($("#departmentEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(){
+                        updateDepartmentTable();
+                        $('#departmentEdit').modal('hide');
+                    }
+                });
+            })
+        }
+        if ($("#dataTable").hasClass("professionSelected")) {
+            $("#professionEdit .modal-title").empty();
+            $("#professionEdit .modal-title").append("Добавить професссию");
+            $('#professionEdit').modal('show');
+
+            $("#professionEdit .modal-footer .save").unbind("click");
+            $("#professionEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "professions",
+                    type: "POST",
+                    data: JSON.stringify(getFormData($("#professionEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(){
+                        updateProfessionTable();
+                        $('#professionEdit').modal('hide');
+                    }
+                });
+            })
+        }
+    });
+
+    $("#editButton").click(function () {
+        if ($("#dataTable").hasClass("employeeSelected")) {
+            $("#employeeEdit .modal-title").empty();
+            $("#employeeEdit .modal-title").append("Редактировать сотрудника");
+
+            var id = $("#dataTable .table-primary td").eq(0).html();
+            $("#employeeEdit :input[name='fio']").val($("#dataTable .table-primary td").eq(1).html());
+            var professionCurrent = $("#dataTable .table-primary td").eq(2).html();
+            var departmentCurrent = $("#dataTable .table-primary td").eq(3).html();
+            $("#employeeEdit :input[name='note']").val($("#dataTable .table-primary td").eq(4).html());
+            $('#employeeEdit').modal('show');
+
+
+            $("#employeeEdit select[name='profession']").empty();
+            $.getJSON( "professions", function( data ) {
+                var items = [];
+                $.each( data, function( key, profession ) {
+                    items.push("<option " + (professionCurrent == profession.name ? "selected " : "") + "value='" + profession.id +"'>"+ profession.name + "</option>");
+                });
+                $("#employeeEdit select[name='profession']").append(items.join(""));
+            });
+            $("#employeeEdit select[name='department']").empty();
+            $.getJSON( "departments", function( data ) {
+                var items = [];
+                $.each( data, function( key, department ) {
+                    items.push("<option "+ (departmentCurrent == department.name ? "selected " : "") + "value='" + department.id +"'>"+ department.name + "</option>");
+                });
+                $("#employeeEdit select[name='department']").append(items.join(""));
+            });
+            $("#employeeEdit .modal-footer .save").unbind("click");
+            $("#employeeEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "employees/"+id,
+                    type: "PUT",
+                    data: JSON.stringify(getFormData($("#employeeEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function() {
+                        updateEmployeeTable();
+                        $('#employeeEdit').modal('hide');
+                    }
+                });
+            })
+        }
+        if ($("#dataTable").hasClass("departmentSelected")) {
+            $("#departmentEdit .modal-title").empty();
+            $("#departmentEdit .modal-title").append("Редактировать отдел");
+            $('#departmentEdit').modal('show');
+
+            var id = $("#dataTable .table-primary td").eq(0).html();
+            $("#departmentEdit :input[name='name']").val($("#dataTable .table-primary td").eq(1).html());
+            $("#departmentEdit :input[name='note']").val($("#dataTable .table-primary td").eq(2).html());
+            var departmentParentCurrent = $("#dataTable .table-primary td").eq(3).html();
+            $('#departmentEdit').modal('show');
+
+
+            $("#departmentEdit select[name='parent']").empty();
+            $.getJSON( "possibleParentDepartments/"+id, function( data ) {
+                var items = [];
+                items.push("<option value></option>");
+                $.each( data, function( key, department ) {
+                    items.push("<option "+ (departmentParentCurrent == department.name ? "selected " : "") + "value='" + department.id +"'>"+ department.name + "</option>");
+                });
+                $("#departmentEdit select[name='parent']").append(items.join(""));
+            })
+            $("#departmentEdit .modal-footer .save").unbind("click");
+            $("#departmentEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "departments/"+id,
+                    type: "PUT",
+                    data: JSON.stringify(getFormData($("#departmentEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function() {
+                        updateDepartmentTable();
+                        $('#departmentEdit').modal('hide');
+                    }
+                });
+            })
+        }
+        if ($("#dataTable").hasClass("professionSelected")) {
+            $("#professionEdit .modal-title").empty();
+            $("#professionEdit .modal-title").append("Редактировать професссию");
+
+            var id = $("#dataTable .table-primary td").eq(0).html();
+            $("#professionEdit :input[name='name']").val($("#dataTable .table-primary td").eq(1).html());
+            $("#professionEdit :input[name='note']").val($("#dataTable .table-primary td").eq(2).html());
+            $('#professionEdit').modal('show');
+
+            $("#professionEdit .modal-footer .save").unbind("click");
+            $("#professionEdit .modal-footer .save").click(function () {
+                jQuery.ajax ({
+                    url: "professions/"+id,
+                    type: "PUT",
+                    data: JSON.stringify(getFormData($("#professionEdit form"))),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function() {
+                        updateProfessionTable();
+                        $('#professionEdit').modal('hide');
+                    }
+                });
+            })
+        }
+    });
+
+    $("#deleteButton").click(function () {
+        $("#deleteModal .modal-title").empty();
+        $("#deleteModal .modal-body p").empty();
+        var url;
+        var id =  $("#dataTable .table-primary td").eq(0).html();
+        var name = $("#dataTable .table-primary td").eq(1).html();
+        var updateFunction;
+        if ($("#dataTable").hasClass("employeeSelected")) {
+            $("#deleteModal .modal-title").append("Удалить сотрудника");
+            $("#deleteModal .modal-body p").append("Вы уверены, что хотите удалить сотрудника " + name + "?");
+            url = "employees";
+            updateFunction = updateEmployeeTable;
+        }
+        if ($("#dataTable").hasClass("departmentSelected")) {
+            $("#deleteModal .modal-title").append("Удалить отдел");
+            $("#deleteModal .modal-body p").append("Вы уверены, что хотите удалить отдел " + name + "?");
+            url = "departments";
+            updateFunction = updateDepartmentTable;
+        }
+        if ($("#dataTable").hasClass("professionSelected")) {
+            $("#deleteModal .modal-title").append("Удалить профессию");
+            $("#deleteModal .modal-body p").append("Вы уверены, что хотите удалить профессию " + name + "?");
+            url = "professions";
+            updateFunction = updateProfessionTable;
+        }
+        $('#deleteModal').modal('show');
+        $("#deleteModal .modal-footer .delete").unbind("click");
+        $("#deleteModal .modal-footer .delete").click(function () {
+            jQuery.ajax ({
+                url: url + "/" + id,
+                type: "DELETE",
+                success: function() {
+                    updateFunction();
+                    $('#deleteModal').modal('hide');
+                },
+                error: function (jqXHR, exception) {
+                    $("#errorModal .modal-body p").empty();
+                    $("#errorModal .modal-body p").append(jqXHR.responseJSON.message);
+                    $("#errorModal .modal-footer .ok").unbind("click");
+                    $("#errorModal .modal-footer .ok").click(function () {
+                        $('#errorModal').modal('hide');
+                    });
+                    $('#errorModal').modal('show');
+                }
+            });
+        });
+        $("#deleteModal .modal-footer .cancel").unbind("click");
+        $("#deleteModal .modal-footer .cancel").click(function () {
+            $('#deleteModal').modal('hide');
+        });
+    });
+
+    $(document).ready(function() {
+        $("#editButtons").hide();
+        $("#editButtons .selectableButtons").attr("disabled", true);
+        $("#employeeEdit .modal-footer .cancel").click(function () {
+            $('#employeeEdit').modal('hide');
+        });
+        $("#departmentEdit .modal-footer .cancel").click(function () {
+            $('#departmentEdit').modal('hide');
+        });
+        $("#professionEdit .modal-footer .cancel").click(function () {
+            $('#professionEdit').modal('hide');
+        })
+    });
+
+    function updateEmployeeTable() {
+        $('#dataTable').empty();
+        $.getJSON( "employees", function( data ) {
+            var items = [];
+            items.push("<thead><tr><th>id</th><th>ФИО</th><th>Профессия</th><th>Отдел</th><th>Примечание</th></tr></thead>");
+            $.each( data, function( key, employee ) {
+                items.push( "<tr class='clickable-row'><td>" + employee.id + "</td><td>" + employee.fio + "</td><td>" + employee.profession + "</td><td>" + employee.department + "</td><td>" + employee.note +"</td></tr>" );
+            });
+
+            $('#dataTable').append(items.join( "" ));
+            $('#dataTable').removeClass('employeeSelected departmentSelected professionSelected');
+            $('#dataTable').addClass('employeeSelected');
+            $("#editButtons").show();
+        });
+    }
+
+    function updateDepartmentTable() {
+        $('#dataTable').empty();
+        $.getJSON( "departments", function( data ) {
+            var items = [];
+            items.push("<thead><tr><th>id</th><th>Наименование</th><th>Примечание</th><th>Родительский отдел</th></tr></thead>");
+            $.each( data, function( key, department ) {
+                items.push( "<tr class='clickable-row'><td>" + department.id + "</td><td>" + department.name + "</td><td>" + department.note + "</td><td>" + (department.parent == null ? "" : department.parent) + "</td></tr>" );
+            });
+
+            $('#dataTable').append(items.join( "" ));
+            $('#dataTable').removeClass('employeeSelected departmentSelected professionSelected');
+            $('#dataTable').addClass('departmentSelected');
+            $("#editButtons").show();
+        });
+    }
+
+    function updateProfessionTable() {
+        $('#dataTable').empty();
+        $.getJSON( "professions", function( data ) {
+            var items = [];
+            items.push("<thead><tr><th>id</th><th>Наименование</th><th>Примечание</th></tr></thead>");
+            $.each( data, function( key, profession ) {
+                items.push( "<tr class='clickable-row'><td>" + profession.id + "</td><td>" + profession.name + "</td><td>" + profession.note + "</td></tr>" );
+            });
+            $('#dataTable').removeClass('employeeSelected departmentSelected professionSelected');
+            $('#dataTable').addClass('professionSelected');
+            $('#dataTable').append(items.join( "" ));
+            $("#editButtons").show();
+        });
+    }
+
+    function getFormData($form){
+        var indexed_array = {};
+
+        $.each($form.serializeArray(), function() {
+            indexed_array[this.name] = isNaN(parseInt(this.value))?this.value:parseInt(this.value);
+        });
+
+        return indexed_array;
+    }
+
+</script>
+</body>
+</html>
